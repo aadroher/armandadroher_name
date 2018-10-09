@@ -2,10 +2,13 @@
   "name": "armandadroher_name",
   "version": "0.0.1",
   "description": "armandadroher.name web page",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Armand Adroher",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "purescript": "^0.12.0"
+  }
 }
