@@ -5,21 +5,22 @@ RUN useradd --user-group --create-home --shell /bin/false app
 ENV HOME=/home/app
 ENV PATH=$HOME/node_modules/.bin/:$PATH
 
-COPY ./package.json $HOME/package.json
 COPY ./.npmrc $HOME/.npmrc
+COPY ./package.json $HOME/package.json
+COPY ./psc-package.json $HOME/psc-package.json
 COPY ./src $HOME/src
+COPY ./test $HOME/test
 
 USER app
 
 WORKDIR $HOME
 
-RUN npm install purescript@0.12.0 pulp psc-package-bin-simple 
-
-# RUN alias p=pulp --psc-package
-
-RUN pulp --psc-package init
+RUN npm install
+RUN npm run purs-install
+RUN npm run purs-build
+RUN npm run purs-test
 
 EXPOSE 80
 
-CMD ["pulp --psc-package", "run"]
+CMD ["npm", "run", "purs-run"]
 
