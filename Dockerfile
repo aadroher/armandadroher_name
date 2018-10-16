@@ -16,9 +16,9 @@ USER app
 WORKDIR $HOME
 
 RUN npm install
-RUN npm run purs-install
-RUN npm run purs-build
-RUN npm run purs-test
+RUN npm run purs-install || exit 1
+RUN npm run purs-build || exit 1
+RUN npm run purs-test || exit 1
 
 EXPOSE 80
 

@@ -8,7 +8,10 @@
     "purs-build": "pulp --psc-package build",
     "purs-test": "pulp --psc-package test",
     "purs-run": "pulp --psc-package run",
-    "purs-server": "pulp --psc-package server"
+    "purs-server": "pulp --psc-package server",
+    "dev": "npm run purs-server --watch",
+    "pretest": "npm install && npm run purs-install && npm run purs-build",
+    "test": "npm run purs-test"
   },
   "author": "Armand Adroher",
   "license": "ISC",
