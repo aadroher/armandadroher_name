@@ -4,13 +4,14 @@
   "description": "armandadroher.name web page",
   "main": "src/index.js",
   "scripts": {
+    "purs-clean": "rimraf output && rimraf .pulp-cache",
     "purs-install": "psc-package install",
-    "purs-build": "pulp --psc-package build",
+    "purs-build": "pulp --psc-package build --to public/app.js",
     "purs-test": "pulp --psc-package test",
     "purs-run": "pulp --psc-package run",
     "purs-server": "pulp --psc-package server",
     "dev": "npm run purs-server --watch",
-    "pretest": "npm install && npm run purs-install && npm run purs-build",
+    "pretest": "npm install && npm run purs-clean && npm run purs-install && npm run purs-build",
     "test": "npm run purs-test"
   },
   "author": "Armand Adroher",
@@ -18,6 +19,12 @@
   "dependencies": {
     "psc-package-bin-simple": "^1.0.4",
     "pulp": "^12.3.0",
-    "purescript": "^0.12.0"
+    "purescript": "^0.12.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  },
+  "devDependencies": {
+    "purescript-psa": "^0.7.3",
+    "rimraf": "^2.6.2"
   }
 }
