@@ -7,6 +7,7 @@
     "purs-clean": "rimraf output && rimraf .pulp-cache",
     "purs-install": "psc-package install",
     "purs-build": "pulp --psc-package build --to public/app.js",
+    "purs-browserify": "pulp --psc-package browserify --to app.js --optimise",
     "purs-test": "pulp --psc-package test",
     "purs-run": "pulp --psc-package run",
     "purs-server": "pulp --psc-package server",
