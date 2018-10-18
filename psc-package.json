@@ -3,8 +3,11 @@
   "set": "psc-0.12.0-20181009",
   "source": "https://github.com/purescript/package-sets.git",
   "depends": [
+    "partial",
+    "web-html",
+    "web-dom",
+    "effect",
     "console",
-    "eff",
     "prelude",
     "psci-support",
     "aff",

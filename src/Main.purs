@@ -2,45 +2,48 @@ module Main where
 
 import Prelude
 import Effect (Effect)
-import Effect.Console (log)
+import Data.Maybe (fromJust)
+-- import Effect.Console (log)
 
-import Thermite as T
+import Web.HTML (window) as DOM
+import Web.HTML.Window (document) as DOM
+import Web.HTML.HTMLDocument (toNonElementParentNode) as DOM
+import Web.DOM.NonElementParentNode (getElementById) as DOM
 
 import React as R
-import React.DOM as R
-import React.DOM.Props as RP
+import React.DOM as RD
+-- import React.DOM.Props as RP
 import ReactDOM as RDOM
 
-data Action = Increment | Decrement
+import Partial.Unsafe (unsafePartial)
 
-initialState :: State
-initialState = { counter: 0 }
+-- import Thermite as T
 
-render :: T.Render State _ Action
-render dispatch _ state _ =
-  [ R.p' [ R.text "Value: "
-         , R.text $ show state.counter
-         ]
-  , R.p' [ R.button [ RP.onClick \_ -> dispatch Increment ]
-                    [ R.text "Increment" ]
-         , R.button [ RP.onClick \_ -> dispatch Decrement ]
-                    [ R.text "Decrement" ]
-         ]
-  ]
-
-performAction :: T.PerformAction _ State _ Action
-performAction Increment _ _ = void (T.cotransform (\state -> state { counter = state.counter + 1 }))
-performAction Decrement _ _ = void (T.cotransform (\state -> state { counter = state.counter - 1 }))
-
-getIncrementValueFromServer :: Aff _ Int
-
-performAction :: T.PerformAction _ State _ Action
-performAction Increment _ _ = do
-  Just amount <- lift getIncrementValueFromServer
-  void $ T.cotransform $ \state -> state { counter = state.counter + amount }
-
-spec :: T.Spec _ State _ Action
-spec = T.simpleSpec performAction render
+app :: R.ReactClass { }
+app = R.pureComponent "App" component
+  where 
+  component this =
+    pure { state: { }
+         , render: render
+         }
+    where
+    render =
+        RD.div 
+          [] 
+          [ RD.h1
+            []
+            [ RD.text "Armand Adroher Salvia"
+            ]
+          ]
 
 main :: Effect Unit
-main = T.defaultMain spec initialState unit
+main = void $ do
+  window <- DOM.window
+  document <- DOM.document window
+  let node = DOM.toNonElementParentNode document
+  appElement <- DOM.getElementById "app" node
+  let appElement' = unsafePartial (fromJust appElement)
+  RDOM.render (R.createLeafElement app { }) appElement'
+
+
+  
