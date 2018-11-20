@@ -1,19 +1,17 @@
 {
   "name": "armandadroher-name",
-  "set": "psc-0.12.0-20181009",
+  "set": "psc-0.12.1",
   "source": "https://github.com/purescript/package-sets.git",
   "depends": [
-    "partial",
-    "web-html",
-    "web-dom",
     "effect",
+    "maybe",
     "console",
     "prelude",
+    "partial",
     "psci-support",
-    "aff",
-    "coroutines",
-    "freet",
-    "profunctor-lenses",
+    "web-dom",
+    "web-html",
+    "react",
     "react-dom"
   ]
 }
