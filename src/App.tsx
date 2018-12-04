@@ -1,8 +1,17 @@
 import React from "react";
+import styled from "styled-components";
+
+const Header = ({ className }: { className: string }) => (
+  <h1 className={className}>Armand Adroher Salvia</h1>
+);
+
+const StyledHeader = styled(Header)`
+  font-family: "Roboto";
+`;
 
 const App = () => (
   <div className="App">
-    <h1>Armand Adroher Salvia</h1>
+    <StyledHeader className="header" />
     <p>Software engineer and school teacher</p>
     <p>
       You may <b>find me</b> here:
