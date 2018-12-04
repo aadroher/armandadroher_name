@@ -1,28 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <h1>Armand Adroher Salvia</h1>
+    <p>Software engineer and school teacher</p>
+    <p>
+      You may <b>find me</b> here:
+    </p>
+    <ul>
+      <li>
+        <a href="https://www.facebook.com/aadroher">/aadroher</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/">@aadroher</a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/armandadroher/">armandadroher</a>
+      </li>
+      <li>
+        <a href="https://github.com/aadroher">aadroher</a>
+      </li>
+    </ul>
+  </div>
+);
 
 export default App;
