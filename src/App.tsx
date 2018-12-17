@@ -18,15 +18,11 @@ const Header = ({ className }: { className: string }) => (
   <h1 className={className}>Armand Adroher Salvia</h1>
 );
 
-const StyledHeader = styled(Header)`
-  font-family: "Roboto";
-`;
-
-type App = React.FunctionComponent;
-const App: App = () => (
-  <div className="App">
+type App = React.FunctionComponent<{ className?: string }>;
+const App: App = ({ className }) => (
+  <div className={classnames("app", className)}>
     <Layout>
-      <StyledHeader className="header" />
+      <Header className="header" />
       <p>Software engineer and school teacher</p>
       <p>
         You may <b>find me</b> here:
@@ -49,4 +45,23 @@ const App: App = () => (
   </div>
 );
 
-export default App;
+const StyledApp = styled(App)`
+  padding: 8px;
+  background-color: black;
+  color: rebeccapurple;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  & > main-container {
+    width: 62.5%;
+    min-width: 30rem;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+export default StyledApp;
