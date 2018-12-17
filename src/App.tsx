@@ -2,8 +2,6 @@ import React, { ReactText } from "react";
 import styled from "styled-components";
 import classnames from "classnames";
 
-// import
-
 interface LayoutProps {
   className?: string;
   children?: React.ReactElement<any>[];
@@ -47,13 +45,15 @@ const App: App = ({ className }) => (
 
 const StyledApp = styled(App)`
   padding: 8px;
-  background-color: black;
-  color: rebeccapurple;
+  background-color: white;
+  color: darkslategray;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
+
+  font-family: "Fira Mono";
 
   & > main-container {
     width: 62.5%;
