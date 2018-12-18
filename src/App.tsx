@@ -16,9 +16,15 @@ const Header = ({ className }: { className: string }) => (
   <h1 className={className}>Armand Adroher Salvia</h1>
 );
 
-type App = React.FunctionComponent<{ className?: string }>;
-const App: App = ({ className }) => (
-  <div className={classnames("app", className)}>
+type BlurRadiusStyle = {
+  textShadow: string;
+};
+type App = React.FunctionComponent<{
+  className?: string;
+  style: BlurRadiusStyle;
+}>;
+const App: App = ({ className, style }) => (
+  <div className={classnames("app", className)} style={style}>
     <Layout>
       <Header className="header" />
       <p>Software engineer and school teacher</p>
@@ -43,8 +49,8 @@ const App: App = ({ className }) => (
   </div>
 );
 
-const fontColour = "green";
-const StyledApp = styled(App)`
+const fontColour = "yellowgreen";
+const StyledApp = styled(App)<{ style: BlurRadiusStyle }>`
   padding: 8px;
   background-color: black;
   position: fixed;
@@ -55,7 +61,6 @@ const StyledApp = styled(App)`
 
   font-family: "Fira Mono";
   color: ${fontColour};
-  text-shadow: ${fontColour} 0 0 1rem;
 
   a {
     color: ${fontColour};
@@ -79,4 +84,60 @@ const StyledApp = styled(App)`
   }
 `;
 
-export default StyledApp;
+class DynamicApp extends React.Component<{}> {
+  maxBlurRadius = 1.5;
+  minBlurRadius = 1;
+  blurRadiusChangeStep = 0.01;
+  blurRadiusUpdateDelay = 50; //ms
+
+  state: {
+    blurRadiusDirection: number;
+    blurRadius: number;
+  };
+
+  intervalId: undefined | number;
+
+  constructor(props: {}) {
+    super(props);
+
+    this.state = {
+      blurRadiusDirection: 1,
+      blurRadius: 1
+    };
+  }
+
+  componentDidMount() {
+    this.intervalId = window.setInterval(() => {
+      this.updateBlurRadius();
+    }, this.blurRadiusUpdateDelay);
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.intervalId);
+  }
+
+  updateBlurRadius = () => {
+    const { blurRadius, blurRadiusDirection } = this.state;
+    const shouldChangeDirection =
+      blurRadius < this.minBlurRadius || this.maxBlurRadius < blurRadius;
+    const newBlurRadiusDirection = shouldChangeDirection
+      ? -blurRadiusDirection
+      : blurRadiusDirection;
+    const newBlurRadius =
+      newBlurRadiusDirection * this.blurRadiusChangeStep + blurRadius;
+
+    this.setState({
+      blurRadiusDirection: newBlurRadiusDirection,
+      blurRadius: newBlurRadius
+    });
+  };
+
+  render = () => {
+    const style = {
+      textShadow: `${fontColour} 0 0 ${this.state.blurRadius}rem`
+    };
+    return <StyledApp style={style} />;
+  };
+}
+
+export default DynamicApp;
