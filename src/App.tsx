@@ -43,10 +43,10 @@ const App: App = ({ className }) => (
   </div>
 );
 
+const fontColour = "green";
 const StyledApp = styled(App)`
   padding: 8px;
-  background-color: white;
-  color: darkslategray;
+  background-color: black;
   position: fixed;
   top: 0;
   left: 0;
@@ -54,13 +54,28 @@ const StyledApp = styled(App)`
   width: 100%;
 
   font-family: "Fira Mono";
+  color: ${fontColour};
+  text-shadow: ${fontColour} 0 0 1rem;
 
-  & > main-container {
+  a {
+    color: ${fontColour};
+  }
+
+  & > .main-container {
     width: 62.5%;
     min-width: 30rem;
     max-width: 80rem;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+
+    ul {
+      li {
+        list-style-type: none;
+      }
+    }
   }
 `;
 
