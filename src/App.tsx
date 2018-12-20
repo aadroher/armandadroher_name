@@ -49,8 +49,8 @@ const App: App = ({ className, style }) => (
   </div>
 );
 
-const fontColour = "yellowgreen";
-const StyledApp = styled(App)<{ style: BlurRadiusStyle }>`
+const fontColour = "palegreen";
+const StyledApp = styled(App)`
   padding: 8px;
   background-color: black;
   position: fixed;
@@ -85,12 +85,13 @@ const StyledApp = styled(App)<{ style: BlurRadiusStyle }>`
 `;
 
 class DynamicApp extends React.Component<{}> {
-  maxBlurRadius = 1.5;
+  maxBlurRadius = 2;
   minBlurRadius = 1;
   blurRadiusChangeStep = 0.01;
-  blurRadiusUpdateDelay = 50; //ms
+  // blurRadiusUpdateDelay = 10; //ms
 
   state: {
+    blurAnimationOn: boolean;
     blurRadiusDirection: number;
     blurRadius: number;
   };
@@ -101,20 +102,29 @@ class DynamicApp extends React.Component<{}> {
     super(props);
 
     this.state = {
+      blurAnimationOn: true,
       blurRadiusDirection: 1,
       blurRadius: 1
     };
   }
 
   componentDidMount() {
-    this.intervalId = window.setInterval(() => {
-      this.updateBlurRadius();
-    }, this.blurRadiusUpdateDelay);
+    this.animateBlurRadius();
   }
 
   componentWillUnmount() {
     window.clearInterval(this.intervalId);
   }
+
+  animateBlurRadius = () => {
+    window.requestAnimationFrame(() => {
+      this.updateBlurRadius();
+      const { blurAnimationOn } = this.state;
+      if (blurAnimationOn) {
+        this.animateBlurRadius();
+      }
+    });
+  };
 
   updateBlurRadius = () => {
     const { blurRadius, blurRadiusDirection } = this.state;
