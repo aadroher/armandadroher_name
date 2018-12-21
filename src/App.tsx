@@ -24,9 +24,7 @@ const App: App = ({ className }) => (
     <Layout>
       <Header className="header" />
       <p>Software engineer and school teacher</p>
-      <p>
-        You may <b>find me</b> here:
-      </p>
+      <p>You may find me here:</p>
       <ul>
         <li>
           <a href="https://www.facebook.com/aadroher">/aadroher</a>
@@ -45,10 +43,11 @@ const App: App = ({ className }) => (
   </div>
 );
 
-const fontColour = "palegreen";
+const fontColour = "violet";
+const shadowColour = "darkviolet";
 const StyledApp = styled(App)`
   padding: 8px;
-  background-color: black;
+  background-color: #0f0f0f;
   position: fixed;
   top: 0;
   left: 0;
@@ -57,6 +56,11 @@ const StyledApp = styled(App)`
 
   font-family: "Fira Mono";
   color: ${fontColour};
+  text-shadow: ${shadowColour} 0 0 0.3rem;
+
+  h1 {
+    font-weight: 400;
+  }
 
   a {
     color: ${fontColour};
@@ -71,6 +75,10 @@ const StyledApp = styled(App)`
     position: relative;
     top: 40%;
     transform: translateY(-50%);
+
+    padding: 2rem;
+    border: solid ${fontColour};
+    box-shadow: ${shadowColour} 0 0 0.3rem;
 
     ul {
       li {
@@ -163,4 +171,4 @@ const AnimatedApp = styled(StyledApp)`
   animation-timing-function: ease-out;
 `;
 
-export default AnimatedApp;
+export default StyledApp;
