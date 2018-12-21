@@ -67,9 +67,7 @@ const StyledApp = styled(App)`
   }
 
   & > .main-container {
-    width: 62.5%;
-    min-width: 30rem;
-    max-width: 80rem;
+    width: 27rem;
     margin-left: auto;
     margin-right: auto;
     position: relative;
