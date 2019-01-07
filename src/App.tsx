@@ -1,13 +1,21 @@
 import React, { ReactText } from "react";
 import styled from "styled-components";
 import classnames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faTwitter,
+  faLinkedin,
+  faGithub,
+  IconDefinition
+} from "@fortawesome/free-brands-svg-icons";
+import { link } from "fs";
 
 interface LayoutProps {
   className?: string;
   children?: React.ReactElement<any>[];
 }
 type Layout = React.FunctionComponent<LayoutProps>;
-
 const Layout: Layout = ({ className, children }) => (
   <div className={classnames("main-container", className)}>{children}</div>
 );
@@ -15,6 +23,28 @@ const Layout: Layout = ({ className, children }) => (
 const Header = ({ className }: { className: string }) => (
   <h1 className={className}>Armand Adroher Salvia</h1>
 );
+
+const getLinks = () => {
+  const links = [
+    [faTwitter, "@", "aadroher", "twitter.com", "Twitter"],
+    [faGithub, "", "aadroher", "github.com", "Github"],
+    [faFacebook, "/", "aadroher", "www.facebook.com", "Facebook"],
+    [faLinkedin, "", "armandadroher", "www.linkedin.com/in", "LinkedIn"]
+  ];
+
+  const linkElements = links.map(
+    ([icon, handlePrefix, handle, urlBase, title]) => (
+      <li key={`${urlBase}/${handle}`}>
+        <FontAwesomeIcon icon={icon as IconDefinition} />
+        <a href={`https://${urlBase}/${handle}`} target="__blank">
+          {`${handlePrefix}${handle}`}
+        </a>
+      </li>
+    )
+  );
+
+  return <ul>{linkElements}</ul>;
+};
 
 type App = React.FunctionComponent<{
   className?: string;
@@ -25,20 +55,7 @@ const App: App = ({ className }) => (
       <Header className="header" />
       <p>Software engineer and school teacher</p>
       <p>You may find me here:</p>
-      <ul>
-        <li>
-          <a href="https://www.facebook.com/aadroher">/aadroher</a>
-        </li>
-        <li>
-          <a href="https://twitter.com/">@aadroher</a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/armandadroher/">armandadroher</a>
-        </li>
-        <li>
-          <a href="https://github.com/aadroher">aadroher</a>
-        </li>
-      </ul>
+      {getLinks()}
     </Layout>
   </div>
 );
@@ -55,6 +72,7 @@ const StyledApp = styled(App)`
   width: 100%;
 
   font-family: "Fira Mono";
+  font-size: 95%;
   color: ${fontColour};
   text-shadow: ${shadowColour} 0 0 0.3rem;
 
@@ -81,92 +99,19 @@ const StyledApp = styled(App)`
     ul {
       li {
         list-style-type: none;
+        a {
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        svg {
+          margin-right: 0.5rem;
+          vertical-align: -0.25rem;
+        }
       }
     }
   }
-`;
-
-// class DynamicApp extends React.Component<{}> {
-//   maxBlurRadius = 2;
-//   minBlurRadius = 1;
-//   blurRadiusChangeStep = 0.01;
-//   // blurRadiusUpdateDelay = 10; //ms
-
-//   state: {
-//     blurAnimationOn: boolean;
-//     blurRadiusDirection: number;
-//     blurRadius: number;
-//   };
-
-//   intervalId: undefined | number;
-
-//   constructor(props: {}) {
-//     super(props);
-
-//     this.state = {
-//       blurAnimationOn: false,
-//       blurRadiusDirection: 1,
-//       blurRadius: 1
-//     };
-//   }
-
-//   componentDidMount() {
-//     this.animateBlurRadius();
-//   }
-
-//   componentWillUnmount() {
-//     window.clearInterval(this.intervalId);
-//   }
-
-//   animateBlurRadius = () => {
-//     window.requestAnimationFrame(() => {
-//       this.updateBlurRadius();
-//       const { blurAnimationOn } = this.state;
-//       if (blurAnimationOn) {
-//         this.animateBlurRadius();
-//       }
-//     });
-//   };
-
-//   updateBlurRadius = () => {
-//     const { blurRadius, blurRadiusDirection } = this.state;
-//     const shouldChangeDirection =
-//       blurRadius < this.minBlurRadius || this.maxBlurRadius < blurRadius;
-//     const newBlurRadiusDirection = shouldChangeDirection
-//       ? -blurRadiusDirection
-//       : blurRadiusDirection;
-//     const newBlurRadius =
-//       newBlurRadiusDirection * this.blurRadiusChangeStep + blurRadius;
-
-//     this.setState({
-//       blurRadiusDirection: newBlurRadiusDirection,
-//       blurRadius: newBlurRadius
-//     });
-//   };
-
-//   render = () => {
-//     const style = {
-//       textShadow: `${fontColour} 0 0 ${this.state.blurRadius}rem`
-//     };
-//   };
-// }
-
-const AnimatedApp = styled(StyledApp)`
-  @keyframes shadow-blur {
-    from {
-      text-shadow: ${fontColour} 0 0 0.3rem;
-    }
-
-    to {
-      text-shadow: ${fontColour} 0 0 0.4rem;
-    }
-  }
-
-  animation-name: shadow-blur;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-timing-function: ease-out;
 `;
 
 export default StyledApp;
