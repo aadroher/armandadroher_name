@@ -2,11 +2,11 @@ import React from "react";
 import figlet from "figlet";
 
 type getBanner = (
-  args: { text: string; fontName?: figlet.Fonts }
+  args: { text: string; font?: figlet.Fonts; fontPath?: string }
 ) => Promise<string>;
-const getBanner: getBanner = ({ text, fontName }) =>
+const getBanner: getBanner = ({ text, font, fontPath }) =>
   new Promise((resolve: Function, reject: Function) => {
-    figlet(text, { font: fontName }, (err, bannerText) => {
+    figlet(text, { font }, (err, bannerText) => {
       if (err) {
         reject(err);
       } else {
@@ -34,7 +34,7 @@ class Header extends React.Component<HeaderProps> {
   componentDidMount() {
     console.log("Component did mount");
     const text = "Armand Adroher";
-    getBanner({ text, fontName: "Standard" })
+    getBanner({ text, font: "Standard" })
       .then(bannerText => {
         console.log("getBanner resolved");
         console.log(bannerText);
