@@ -64,11 +64,11 @@ const shadowColour = "darkviolet";
 const StyledApp = styled(App)`
   padding: 8px;
   background-color: #0f0f0f;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
+  /* height: 100%; */
+  /* width: 100%; */
 
   font-family: "Fira Mono";
   font-size: 120%;
@@ -88,12 +88,16 @@ const StyledApp = styled(App)`
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    top: 40%;
-    transform: translateY(-50%);
+    /* top: 40%; */
+    /* transform: translateY(-50%); */
 
     padding: 2rem;
     /* border: solid ${fontColour}; */
     /* box-shadow: ${shadowColour} 0 0 0.3rem; */
+
+    .header {
+      font-weight: bolder;
+    }
 
     ul {
       li {
