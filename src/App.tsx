@@ -25,16 +25,18 @@ const Icon: Icon = ({ iconClassName, className }) => (
 );
 
 const StyledIcon = styled(Icon)`
-  font-size: 100%;
-  margin-right: 0.5rem;
+  /* font-size: 100%; */
+  margin-right: 0.6rem;
+  min-width: 1rem;
+  text-align: center;
 `;
 
 const getLinks = () => {
   const links = [
     ["fa-twitter", "@", "aadroher", "twitter.com", "Twitter"],
-    ["fa-github", "", "aadroher", "github.com", "Github"],
-    ["fa-facebook", "/", "aadroher", "www.facebook.com", "Facebook"],
-    ["fa-linkedin", "", "armandadroher", "www.linkedin.com/in", "LinkedIn"]
+    ["fa-github-alt", "", "aadroher", "github.com", "Github"],
+    ["fa-facebook-f", "/", "aadroher", "www.facebook.com", "Facebook"],
+    ["fa-linkedin-in", "", "armandadroher", "www.linkedin.com/in", "LinkedIn"]
   ];
 
   const linkElements = links.map(
