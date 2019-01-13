@@ -15,6 +15,20 @@ const Layout: Layout = ({ className, children }) => (
   <div className={classnames("main-container", className)}>{children}</div>
 );
 
+interface IconProps {
+  iconClassName: string;
+  className?: string;
+}
+type Icon = React.FunctionComponent<IconProps>;
+const Icon: Icon = ({ iconClassName, className }) => (
+  <i className={classnames("fab", iconClassName, className)} />
+);
+
+const StyledIcon = styled(Icon)`
+  font-size: 100%;
+  margin-right: 0.5rem;
+`;
+
 const getLinks = () => {
   const links = [
     ["fa-twitter", "@", "aadroher", "twitter.com", "Twitter"],
@@ -26,18 +40,10 @@ const getLinks = () => {
   const linkElements = links.map(
     ([iconClassName, handlePrefix, handle, urlBase, title]) => (
       <li key={`${urlBase}/${handle}`}>
-        <pre>
-          <span
-            style={{
-              fontSize: "1rem"
-            }}
-          >
-            <i className={classnames("fab", iconClassName)} />
-          </span>
-          <a href={`https://${urlBase}/${handle}`} target="__blank">
-            {`${handlePrefix}${handle}`}
-          </a>
-        </pre>
+        <a href={`https://${urlBase}/${handle}`} target="__blank">
+          <StyledIcon iconClassName={iconClassName} />
+          {`${handlePrefix}${handle}`}
+        </a>
       </li>
     )
   );
@@ -52,8 +58,8 @@ const App: App = ({ className }) => (
   <div className={classnames("app", className)}>
     <Layout>
       <Header />
-      <pre>Software engineer and school teacher</pre>
-      <pre>You may find me here:</pre>
+      <p>Software engineer and school teacher</p>
+      <p>You may find me here:</p>
       {getLinks()}
     </Layout>
   </div>
@@ -71,13 +77,9 @@ const StyledApp = styled(App)`
   width: 100%;
 
   font-family: "Fira Mono";
-  font-size: 120%;
+  font-size: 16px;
   color: ${fontColour};
   text-shadow: ${shadowColour} 0 0 0.3rem;
-
-  h1 {
-    font-weight: 400;
-  }
 
   a {
     color: ${fontColour};
@@ -92,12 +94,6 @@ const StyledApp = styled(App)`
     transform: translateY(-50%);
 
     padding: 2rem;
-    /* border: solid ${fontColour}; */
-    /* box-shadow: ${shadowColour} 0 0 0.3rem; */
-
-    .header {
-      font-weight: bolder;
-    }
 
     ul {
       li {
@@ -107,10 +103,6 @@ const StyledApp = styled(App)`
           &:hover {
             text-decoration: underline;
           }
-        }
-        svg {
-          margin-right: 0.5rem;
-          /* vertical-align: -0.25rem; */
         }
       }
     }
