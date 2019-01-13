@@ -1,15 +1,10 @@
 import React, { ReactText } from "react";
 import styled from "styled-components";
 import classnames from "classnames";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faTwitter,
-  faLinkedin,
-  faGithub,
-  IconDefinition
-} from "@fortawesome/free-brands-svg-icons";
-import { link } from "fs";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/css/brands.css";
+
+import Header from "./Header";
 
 interface LayoutProps {
   className?: string;
@@ -20,25 +15,29 @@ const Layout: Layout = ({ className, children }) => (
   <div className={classnames("main-container", className)}>{children}</div>
 );
 
-const Header = ({ className }: { className: string }) => (
-  <h1 className={className}>Armand Adroher Salvia</h1>
-);
-
 const getLinks = () => {
   const links = [
-    [faTwitter, "@", "aadroher", "twitter.com", "Twitter"],
-    [faGithub, "", "aadroher", "github.com", "Github"],
-    [faFacebook, "/", "aadroher", "www.facebook.com", "Facebook"],
-    [faLinkedin, "", "armandadroher", "www.linkedin.com/in", "LinkedIn"]
+    ["fa-twitter", "@", "aadroher", "twitter.com", "Twitter"],
+    ["fa-github", "", "aadroher", "github.com", "Github"],
+    ["fa-facebook", "/", "aadroher", "www.facebook.com", "Facebook"],
+    ["fa-linkedin", "", "armandadroher", "www.linkedin.com/in", "LinkedIn"]
   ];
 
   const linkElements = links.map(
-    ([icon, handlePrefix, handle, urlBase, title]) => (
+    ([iconClassName, handlePrefix, handle, urlBase, title]) => (
       <li key={`${urlBase}/${handle}`}>
-        <FontAwesomeIcon icon={icon as IconDefinition} />
-        <a href={`https://${urlBase}/${handle}`} target="__blank">
-          {`${handlePrefix}${handle}`}
-        </a>
+        <pre>
+          <span
+            style={{
+              fontSize: "1rem"
+            }}
+          >
+            <i className={classnames("fab", iconClassName)} />
+          </span>
+          <a href={`https://${urlBase}/${handle}`} target="__blank">
+            {`${handlePrefix}${handle}`}
+          </a>
+        </pre>
       </li>
     )
   );
@@ -52,9 +51,9 @@ type App = React.FunctionComponent<{
 const App: App = ({ className }) => (
   <div className={classnames("app", className)}>
     <Layout>
-      <Header className="header" />
-      <p>Software engineer and school teacher</p>
-      <p>You may find me here:</p>
+      <Header />
+      <pre>Software engineer and school teacher</pre>
+      <pre>You may find me here:</pre>
       {getLinks()}
     </Layout>
   </div>
@@ -72,7 +71,7 @@ const StyledApp = styled(App)`
   width: 100%;
 
   font-family: "Fira Mono";
-  font-size: 95%;
+  font-size: 120%;
   color: ${fontColour};
   text-shadow: ${shadowColour} 0 0 0.3rem;
 
@@ -93,8 +92,12 @@ const StyledApp = styled(App)`
     transform: translateY(-50%);
 
     padding: 2rem;
-    border: solid ${fontColour};
-    box-shadow: ${shadowColour} 0 0 0.3rem;
+    /* border: solid ${fontColour}; */
+    /* box-shadow: ${shadowColour} 0 0 0.3rem; */
+
+    .header {
+      font-weight: bolder;
+    }
 
     ul {
       li {
@@ -107,7 +110,7 @@ const StyledApp = styled(App)`
         }
         svg {
           margin-right: 0.5rem;
-          vertical-align: -0.25rem;
+          /* vertical-align: -0.25rem; */
         }
       }
     }
