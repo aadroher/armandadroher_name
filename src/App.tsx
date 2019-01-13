@@ -1,14 +1,8 @@
 import React, { ReactText } from "react";
 import styled from "styled-components";
 import classnames from "classnames";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faTwitter,
-  faLinkedin,
-  faGithub,
-  IconDefinition
-} from "@fortawesome/free-brands-svg-icons";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/css/brands.css";
 
 import Header from "./Header";
 
@@ -23,17 +17,23 @@ const Layout: Layout = ({ className, children }) => (
 
 const getLinks = () => {
   const links = [
-    [faTwitter, "@", "aadroher", "twitter.com", "Twitter"],
-    [faGithub, "", "aadroher", "github.com", "Github"],
-    [faFacebook, "/", "aadroher", "www.facebook.com", "Facebook"],
-    [faLinkedin, "", "armandadroher", "www.linkedin.com/in", "LinkedIn"]
+    ["fa-twitter", "@", "aadroher", "twitter.com", "Twitter"],
+    ["fa-github", "", "aadroher", "github.com", "Github"],
+    ["fa-facebook", "/", "aadroher", "www.facebook.com", "Facebook"],
+    ["fa-linkedin", "", "armandadroher", "www.linkedin.com/in", "LinkedIn"]
   ];
 
   const linkElements = links.map(
-    ([icon, handlePrefix, handle, urlBase, title]) => (
+    ([iconClassName, handlePrefix, handle, urlBase, title]) => (
       <li key={`${urlBase}/${handle}`}>
         <pre>
-          <FontAwesomeIcon icon={icon as IconDefinition} />
+          <span
+            style={{
+              fontSize: "1rem"
+            }}
+          >
+            <i className={classnames("fab", iconClassName)} />
+          </span>
           <a href={`https://${urlBase}/${handle}`} target="__blank">
             {`${handlePrefix}${handle}`}
           </a>
