@@ -1,31 +1,7 @@
 import React from "react";
 import figlet from "figlet";
-import { text } from "@fortawesome/fontawesome-svg-core";
-import { string } from "prop-types";
 
-const fontIndexPath = "./fonts/index.txt";
-
-type getFontNames = (args: { fontIndexPath: string }) => Promise<string[]>;
-const getFontNames: getFontNames = ({ fontIndexPath }) =>
-  fetch(fontIndexPath)
-    .then(response => {
-      if (response.ok) {
-        return response.text();
-      } else {
-        throw `HTTP Error ${response.status} - ${response.statusText}`;
-      }
-    })
-    .then(responseBody => responseBody.split("\n"))
-    .then(fontFilenames =>
-      fontFilenames.map(fontFileName => {
-        const [fontName, ext] = fontFileName.split(".");
-        return fontName;
-      })
-    )
-    .then(x => {
-      console.log(x);
-      return x;
-    });
+const fontName = "Calvin S";
 
 type getBanner = (
   args: { text: string; font?: figlet.Fonts }
@@ -51,25 +27,6 @@ interface BannerData {
   bannerTextLines: string[];
 }
 
-type getBanners = (
-  args: { textLines: string[]; fontIndexPath: string; receiver: Header }
-) => Promise<void>;
-const getBanners: getBanners = async ({ textLines, fontIndexPath, receiver }) =>
-  getFontNames({ fontIndexPath }).then(async fontNames => {
-    fontNames.forEach(async fontName => {
-      const [text] = textLines;
-      const bannerText = await getBanner({
-        text,
-        font: fontName as figlet.Fonts
-      });
-      const bannerTextLines = [bannerText];
-      const { banners } = receiver.state;
-      receiver.setState({
-        banners: [...banners, { fontName, bannerTextLines }]
-      });
-    });
-  });
-
 interface HeaderProps {
   fontName?: string;
 }
@@ -88,9 +45,20 @@ class Header extends React.Component<HeaderProps> {
 
   componentDidMount() {
     console.log("Component did mount");
-    const textLines = ["Armand\nAdroher", "Adroher"];
-    const receiver = this;
-    getBanners({ textLines, fontIndexPath, receiver });
+    const textLines = ["armand adroher"];
+    Promise.all(
+      textLines.map(text => getBanner({ text, font: fontName }))
+    ).then(bannerTextLines => {
+      console.log(0);
+      this.setState({
+        banners: [
+          {
+            fontName,
+            bannerTextLines
+          }
+        ]
+      });
+    });
   }
 
   render() {
@@ -101,9 +69,9 @@ class Header extends React.Component<HeaderProps> {
           <pre key={bannerTextLine}>
             {bannerTextLine}
             <br />
+            =========================================
           </pre>
         ))}
-        <p>{fontName}</p>
       </div>
     ));
     return <div className="header">{bannerComponents}</div>;
