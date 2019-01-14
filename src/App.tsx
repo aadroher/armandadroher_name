@@ -111,4 +111,4 @@ const StyledApp = styled(App)`
   }
 `;
 
-export default StyledApp;
+export default App;
