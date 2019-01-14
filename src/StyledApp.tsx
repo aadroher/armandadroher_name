@@ -1,27 +1,42 @@
 import styled, { keyframes } from "styled-components";
+import tinycolor from "tinycolor2";
 import App from "./App";
 
 const fontColours = [
-  ["violet", "darkviolet"],
-  ["green", "darkgreen"],
-  ["red", "darkred"],
-  ["orange", "darkorange"],
-  ["hotpink", "deeppink"]
+  "pink",
+  "hotpink",
+  "deeppink"
+  //   "green",
+  //   "blue",
+  //   "indigo",
+  //   "violet"
 ];
 
-const colourAnimation = keyframes`
-    from {
-        color: ${fontColours[0][0]};
-        text-shadow: ${fontColours[0][1]} 0 0 0.3rem;
-    }
+const numColours = fontColours.length;
+const keyFrames = fontColours
+  .map((fontColourName, i) => {
+    const isFirst = i === 0;
+    const isLast = i === numColours - 1;
+    const stepName = isFirst
+      ? "from"
+      : isLast
+      ? "to"
+      : `${(i * 100) / (numColours - 1)}%`;
 
-    to {
-        color: ${fontColours[3][0]};
-        text-shadow: ${fontColours[3][1]} 0 0 0.3rem;
-    }
-`;
+    const colour = tinycolor(fontColourName);
 
-const [fontColour, shadowColour] = fontColours[4];
+    return `
+        ${stepName} { 
+            color: #${colour.toHex()};
+            text-shadow: #${colour.darken(30).toHex()} 0 0 0.3rem;
+        }
+  `;
+  })
+  .join("\n");
+
+console.log(keyFrames);
+const colourAnimation = keyframes`${keyFrames}`;
+
 const StyledApp = styled(App)`
   padding: 8px;
   background-color: #0f0f0f;
@@ -33,11 +48,11 @@ const StyledApp = styled(App)`
 
   font-family: "Fira Mono";
   font-size: 16px;
-  animation: ${colourAnimation} 2s linear infinite alternate;
+  animation: ${colourAnimation} ${numColours * 10}s linear infinite alternate;
 
   a {
-    animation: ${colourAnimation} 2s linear infinite alternate;
-    color: ${fontColour};
+    color: inherit;
+    animation: inherit;
   }
 
   & > .main-container {
