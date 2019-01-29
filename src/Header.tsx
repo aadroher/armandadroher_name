@@ -4,12 +4,12 @@ import styled from "styled-components";
 import classnames from "classnames";
 
 const fontName = "Calvin S";
-const bannerText = "armand adroher";
+const headerText = "armand adroher";
 
-type getBanner = (
+type getBannerText = (
   args: { text: string; font?: figlet.Fonts }
 ) => Promise<string>;
-const getBanner: getBanner = ({ text, font }) =>
+const getBanner: getBannerText = ({ text, font }) =>
   new Promise((resolve: Function, reject: Function) => {
     figlet(text, { font }, (err, bannerText) => {
       if (err) {
@@ -20,8 +20,44 @@ const getBanner: getBanner = ({ text, font }) =>
     });
   });
 
+type Banner = React.FunctionComponent<{
+  key?: string;
+  className?: string;
+  text?: string;
+}>;
+
+const Banner: Banner = ({ key, className, text }) => {
+  const lines = (text || "").split("\n");
+  const [firstLine] = lines;
+  const numColumns = firstLine.length;
+  const underline = new Array(numColumns).fill("=").join("");
+  return (
+    <div key={key} className={classnames("header", className)}>
+      <pre key={text}>
+        {text}
+        <br />
+        {underline}
+      </pre>
+    </div>
+  );
+};
+
+type getBanners = () => Promise<BannerData[]>;
+
+const getBannersData = () => {
+  const oneLineHeaderData = {
+    className: "desktop",
+    headerText
+  };
+  const twoLineHeaderData = {
+    className: "mobile",
+    headerText: headerText.replace(" ", "\n")
+  };
+};
+
 interface BannerData {
-  bannerText: string;
+  className?: string;
+  bannerText?: string;
 }
 interface HeaderProps {
   fontName?: string;
@@ -29,23 +65,18 @@ interface HeaderProps {
 }
 class Header extends React.Component<HeaderProps> {
   state: {
-    banner: BannerData;
+    banners: BannerData[];
   };
 
   constructor(props: HeaderProps) {
     super(props);
-    this.state = {
-      banner: {
-        bannerText: ""
-      }
-    };
+    this.state = { banners: [] };
   }
 
   componentDidMount() {
-    getBanner({ text: bannerText, font: fontName }).then(bannerText => {
+    getBanner({ text: headerText, font: fontName }).then(bannerText => {
       this.setState({
         banner: {
-          fontName,
           bannerText
         }
       });
@@ -58,15 +89,7 @@ class Header extends React.Component<HeaderProps> {
       banner: { bannerText }
     } = this.state;
 
-    return (
-      <div className={classnames("header", className)}>
-        <pre key={bannerText}>
-          {bannerText}
-          <br />
-          =========================================
-        </pre>
-      </div>
-    );
+    return <Banner text={bannerText} key={bannerText} />;
   }
 }
 
