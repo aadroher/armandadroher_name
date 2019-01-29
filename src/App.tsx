@@ -4,6 +4,7 @@ import classnames from "classnames";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/css/brands.css";
 
+import "./assets/fira.css";
 import Header from "./Header";
 
 interface LayoutProps {
