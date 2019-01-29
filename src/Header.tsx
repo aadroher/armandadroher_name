@@ -9,7 +9,7 @@ const headerText = "armand adroher";
 type getBannerText = (
   args: { text: string; font?: figlet.Fonts }
 ) => Promise<string>;
-const getBanner: getBannerText = ({ text, font }) =>
+const getBannerText: getBannerText = ({ text, font }) =>
   new Promise((resolve: Function, reject: Function) => {
     figlet(text, { font }, (err, bannerText) => {
       if (err) {
@@ -20,30 +20,12 @@ const getBanner: getBannerText = ({ text, font }) =>
     });
   });
 
-type Banner = React.FunctionComponent<{
-  key?: string;
+interface BannerData {
   className?: string;
-  text?: string;
-}>;
+  bannerText?: string;
+}
 
-const Banner: Banner = ({ key, className, text }) => {
-  const lines = (text || "").split("\n");
-  const [firstLine] = lines;
-  const numColumns = firstLine.length;
-  const underline = new Array(numColumns).fill("=").join("");
-  return (
-    <div key={key} className={classnames("header", className)}>
-      <pre key={text}>
-        {text}
-        <br />
-        {underline}
-      </pre>
-    </div>
-  );
-};
-
-type getBanners = () => Promise<BannerData[]>;
-
+type getBannersData = () => Promise<BannerData[]>;
 const getBannersData = () => {
   const oneLineHeaderData = {
     className: "desktop",
@@ -53,16 +35,41 @@ const getBannersData = () => {
     className: "mobile",
     headerText: headerText.replace(" ", "\n")
   };
+  return Promise.all(
+    [oneLineHeaderData, twoLineHeaderData].map(({ className, headerText }) =>
+      getBannerText({ text: headerText, font: fontName }).then(bannerText => ({
+        className,
+        bannerText
+      }))
+    )
+  );
 };
 
-interface BannerData {
+type Banner = React.FunctionComponent<{
+  key?: string;
   className?: string;
-  bannerText?: string;
-}
+  text?: string;
+}>;
+
+const Banner: Banner = ({ className, text }) => {
+  const lines = (text || "").split("\n");
+  const [firstLine] = lines;
+  const numColumns = firstLine.length;
+  const underline = new Array(numColumns).fill("=").join("");
+  return (
+    <pre className={className}>
+      {text}
+      <br />
+      {underline}
+    </pre>
+  );
+};
+
 interface HeaderProps {
   fontName?: string;
   className?: string;
 }
+
 class Header extends React.Component<HeaderProps> {
   state: {
     banners: BannerData[];
@@ -71,30 +78,57 @@ class Header extends React.Component<HeaderProps> {
   constructor(props: HeaderProps) {
     super(props);
     this.state = { banners: [] };
+    this.setBanners = this.setBanners.bind(this);
   }
 
   componentDidMount() {
-    getBanner({ text: headerText, font: fontName }).then(bannerText => {
-      this.setState({
-        banner: {
-          bannerText
-        }
+    this.setBanners();
+  }
+
+  setBanners() {
+    getBannersData()
+      .then(banners => {
+        console.log({ banners });
+        this.setState({ banners });
+      })
+      .catch(err => {
+        console.error(err);
       });
-    });
   }
 
   render() {
     const { className } = this.props;
-    const {
-      banner: { bannerText }
-    } = this.state;
+    const { banners } = this.state;
 
-    return <Banner text={bannerText} key={bannerText} />;
+    return (
+      <div className={classnames("header", className)}>
+        {banners.map(({ className, bannerText }) => (
+          <Banner key={bannerText} className={className} text={bannerText} />
+        ))}
+      </div>
+    );
   }
 }
 
 const StyledHeader = styled(Header)`
   font-weight: 900;
+
+  .desktop {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
+
+  @media (max-width: 27rem) {
+    .desktop {
+      display: none;
+    }
+
+    .mobile {
+      display: block;
+    }
+  }
 `;
 
 export default StyledHeader;

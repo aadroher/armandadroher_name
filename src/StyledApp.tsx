@@ -34,7 +34,6 @@ const keyFrames = fontColours
   })
   .join("\n");
 
-console.log(keyFrames);
 const colourAnimation = keyframes`${keyFrames}`;
 
 const StyledApp = styled(App)`
@@ -57,6 +56,9 @@ const StyledApp = styled(App)`
 
   & > .main-container {
     width: 27rem;
+    @media (max-width: 27rem) {
+      width: 15rem;
+    }
     margin-left: auto;
     margin-right: auto;
     position: relative;
