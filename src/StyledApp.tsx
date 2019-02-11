@@ -2,39 +2,59 @@ import styled, { keyframes } from "styled-components";
 import tinycolor from "tinycolor2";
 import App from "./App";
 
-const fontColours = [
+const fontColourNames = [
   "pink",
   "hotpink",
   "deeppink"
-  //   "green",
+  // "green"
   //   "blue",
   //   "indigo",
   //   "violet"
 ];
 
-const numColours = fontColours.length;
-const keyFrames = fontColours
-  .map((fontColourName, i) => {
-    const isFirst = i === 0;
-    const isLast = i === numColours - 1;
-    const stepName = isFirst
-      ? "from"
-      : isLast
-      ? "to"
-      : `${(i * 100) / (numColours - 1)}%`;
+const numColours = fontColourNames.length;
 
-    const colour = tinycolor(fontColourName);
-
-    return `
-        ${stepName} { 
-            color: #${colour.toHex()};
-            text-shadow: #${colour.darken(30).toHex()} 0 0 0.3rem;
-        }
+type getKeyFramesFragment = (
+  stepName: string,
+  attributeName: string,
+  attributeValue: string
+) => string;
+const getKeyFramesFragment: getKeyFramesFragment = (
+  stepName,
+  attributeName,
+  attributeValue
+) => `
+    ${stepName} { 
+      ${attributeName}: ${attributeValue};
+    }
   `;
-  })
-  .join("\n");
 
-const colourAnimation = keyframes`${keyFrames}`;
+// return `
+//   ${stepName} {
+//     color: #${colour.toHex()};
+//     text-shadow: 0px 0px 1rem #${colour.darken(30).toHex()};
+//   }
+// `;
+
+const colourPairs = fontColourNames.map(fontColourName => {
+  const colour = tinycolor(fontColourName);
+  return {
+    fontColour: colour.toHex(),
+    shadowColour: colour.brighten(10).toHex()
+  };
+});
+
+type getPercentageStepName = (i: number, numColours: number) => string;
+const getPercentageStepName: getPercentageStepName = (i, numColours) =>
+  `${(i * 100) / (numColours - 1)}%`;
+
+console.log({ colourPairs });
+
+// const keyFramesFragments =
+
+// console.log(keyFramesFragments);
+
+const colourAnimation = keyframes``;
 
 const StyledApp = styled(App)`
   padding: 8px;
