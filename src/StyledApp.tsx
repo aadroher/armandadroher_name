@@ -55,7 +55,7 @@ const StyledApp = styled(App)`
   }
 
   & > .main-container {
-    width: 27rem;
+    width: 30rem;
     @media (max-width: 27rem) {
       width: 15rem;
     }

@@ -61,7 +61,6 @@ const App: App = ({ className }) => (
   <div className={classnames("app", className)}>
     <Layout>
       <Header />
-      <p>You may find me here:</p>
       {getLinks()}
     </Layout>
   </div>
