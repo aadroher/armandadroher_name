@@ -2,59 +2,9 @@ import styled, { keyframes } from "styled-components";
 import tinycolor from "tinycolor2";
 import App from "./App";
 
-const fontColourNames = [
-  "pink",
-  "hotpink",
-  "deeppink"
-  // "green"
-  //   "blue",
-  //   "indigo",
-  //   "violet"
-];
-
-const numColours = fontColourNames.length;
-
-type getKeyFramesFragment = (
-  stepName: string,
-  attributeName: string,
-  attributeValue: string
-) => string;
-const getKeyFramesFragment: getKeyFramesFragment = (
-  stepName,
-  attributeName,
-  attributeValue
-) => `
-    ${stepName} { 
-      ${attributeName}: ${attributeValue};
-    }
-  `;
-
-// return `
-//   ${stepName} {
-//     color: #${colour.toHex()};
-//     text-shadow: 0px 0px 1rem #${colour.darken(30).toHex()};
-//   }
-// `;
-
-const colourPairs = fontColourNames.map(fontColourName => {
-  const colour = tinycolor(fontColourName);
-  return {
-    fontColour: colour.toHex(),
-    shadowColour: colour.brighten(10).toHex()
-  };
-});
-
-type getPercentageStepName = (i: number, numColours: number) => string;
-const getPercentageStepName: getPercentageStepName = (i, numColours) =>
-  `${(i * 100) / (numColours - 1)}%`;
-
-console.log({ colourPairs });
-
-// const keyFramesFragments =
-
-// console.log(keyFramesFragments);
-
-const colourAnimation = keyframes``;
+const fontColour = "violet";
+const shadowBrighteningPercentage = 10;
+const shadowRadius = 0.3; // in rem.
 
 const StyledApp = styled(App)`
   padding: 8px;
@@ -67,7 +17,10 @@ const StyledApp = styled(App)`
 
   font-family: "Fira Mono";
   font-size: 16px;
-  animation: ${colourAnimation} ${numColours * 10}s linear infinite alternate;
+  color: #${tinycolor(fontColour).toHex()};
+  text-shadow: #${tinycolor(fontColour)
+      .brighten(shadowBrighteningPercentage)
+      .toHex()} 0 0 ${shadowRadius}rem;
 
   a {
     color: inherit;
