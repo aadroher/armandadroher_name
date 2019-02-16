@@ -88,7 +88,6 @@ class Header extends React.Component<HeaderProps> {
   setBanners() {
     getBannersData()
       .then(banners => {
-        console.log({ banners });
         this.setState({ banners });
       })
       .catch(err => {
