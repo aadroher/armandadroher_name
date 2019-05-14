@@ -43,7 +43,12 @@ const getLinks = () => {
   const linkElements = links.map(
     ([iconClassName, handlePrefix, handle, urlBase, title]) => (
       <li key={`${urlBase}/${handle}`}>
-        <a href={`https://${urlBase}/${handle}`} target="__blank">
+        <a
+          href={`https://${urlBase}/${handle}`}
+          target="__blank"
+          rel="external"
+          aria-label={`${title} profile`}
+        >
           <StyledIcon iconClassName={iconClassName} />
           {`${handlePrefix}${handle}`}
         </a>

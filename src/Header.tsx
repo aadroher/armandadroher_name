@@ -4,14 +4,16 @@ import styled from "styled-components";
 import classnames from "classnames";
 
 const fontName = "Calvin S";
-const headerText = "armand adroher";
+const headerText = "Armand Adroher";
 
-type getBannerText = (
-  args: { text: string; font?: figlet.Fonts }
-) => Promise<string>;
+type getBannerText = (args: {
+  text: string;
+  font?: figlet.Fonts;
+}) => Promise<string>;
 const getBannerText: getBannerText = ({ text, font }) =>
   new Promise((resolve: Function, reject: Function) => {
-    figlet(text, { font }, (err, bannerText) => {
+    const lowerCaseText = text.toLowerCase();
+    figlet(lowerCaseText, { font }, (err, bannerText) => {
       if (err) {
         reject(err);
       } else {
@@ -57,7 +59,12 @@ const Banner: Banner = ({ className, text }) => {
   const numColumns = firstLine.length;
   const underline = new Array(numColumns).fill("=").join("");
   return (
-    <pre className={className}>
+    <pre
+      className={className}
+      role="heading"
+      aria-level={1}
+      aria-label={headerText}
+    >
       {text}
       <br />
       {underline}
