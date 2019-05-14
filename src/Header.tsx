@@ -126,7 +126,7 @@ const StyledHeader = styled(Header)`
     display: none;
   }
 
-  @media (max-width: 35rem) {
+  @media (max-width: 27rem) {
     .desktop {
       display: none;
     }
