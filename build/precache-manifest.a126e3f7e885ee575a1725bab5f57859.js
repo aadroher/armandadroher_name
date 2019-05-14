@@ -28,12 +28,12 @@ self.__precacheManifest = [
     "url": "/static/media/fa-regular-400.fc5252e5.woff"
   },
   {
-    "revision": "deb8619e67992d3fa088b5dcbb8cff36",
-    "url": "/static/media/fa-regular-400.deb8619e.ttf"
-  },
-  {
     "revision": "8e9f0ee6d016526776c27f91fea55cca",
     "url": "/static/media/fa-regular-400.8e9f0ee6.eot"
+  },
+  {
+    "revision": "deb8619e67992d3fa088b5dcbb8cff36",
+    "url": "/static/media/fa-regular-400.deb8619e.ttf"
   },
   {
     "revision": "b89c6c51aa2999159a6667f97a46a346",
@@ -80,12 +80,12 @@ self.__precacheManifest = [
     "url": "/static/media/fa-solid-900.27603739.svg"
   },
   {
-    "revision": "b6ef510e2306c6c6243f880a30cc3089",
-    "url": "/static/media/FiraMono-Bold.b6ef510e.woff"
-  },
-  {
     "revision": "690950e8d89c92cba41eeeb13f1de93e",
     "url": "/static/media/FiraMono-Regular.690950e8.woff"
+  },
+  {
+    "revision": "b6ef510e2306c6c6243f880a30cc3089",
+    "url": "/static/media/FiraMono-Bold.b6ef510e.woff"
   },
   {
     "revision": "be21f2b6eb3f7af19cb9acbc7c7430fe",
