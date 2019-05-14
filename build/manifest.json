@@ -1,0 +1,9 @@
+{
+  "short_name": "armandadroher.name",
+  "name": "ArmandAdroher.name",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
