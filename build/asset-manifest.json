@@ -9,10 +9,10 @@
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
   "static/media/all.css": "/static/media/fa-solid-900.27603739.svg",
   "static/media/brands.css": "/static/media/fa-brands-400.fef43c1f.svg",
-  "static/media/fira.css": "/static/media/FiraMono-Bold.b6ef510e.woff",
+  "static/media/fira.css": "/static/media/FiraMono-Regular.690950e8.woff",
   "static/css/main.fdf2d7fe.chunk.css.map": "/static/css/main.fdf2d7fe.chunk.css.map",
   "static/css/1.bd602ec1.chunk.css.map": "/static/css/1.bd602ec1.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.b92f50fc50b1923cf771dd6703ac58a0.js": "/precache-manifest.b92f50fc50b1923cf771dd6703ac58a0.js",
+  "precache-manifest.e4e8f10c37fb746fc82cfc4deaddc2d4.js": "/precache-manifest.e4e8f10c37fb746fc82cfc4deaddc2d4.js",
   "service-worker.js": "/service-worker.js"
 }
