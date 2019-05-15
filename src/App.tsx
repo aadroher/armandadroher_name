@@ -45,7 +45,6 @@ const getLinks = () => {
       <li key={`${urlBase}/${handle}`}>
         <a
           href={`https://${urlBase}/${handle}`}
-          target="__blank"
           rel="external"
           aria-label={`${title} profile`}
         >
