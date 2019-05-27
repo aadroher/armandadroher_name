@@ -109,7 +109,11 @@ class Header extends React.Component<HeaderProps> {
     return (
       <div className={classnames("header", className)}>
         {banners.map(({ className, bannerText }) => (
-          <Banner key={bannerText} className={className} text={bannerText} />
+          <Banner
+            key={bannerText}
+            className={classnames(className, "banner")}
+            text={bannerText}
+          />
         ))}
       </div>
     );
@@ -118,6 +122,10 @@ class Header extends React.Component<HeaderProps> {
 
 const StyledHeader = styled(Header)`
   font-weight: 900;
+
+  .banner {
+    line-height: 1;
+  }
 
   .desktop {
     display: block;
