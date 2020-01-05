@@ -5,9 +5,6 @@ interface Point {
 
 type SerialisePoint = (point: Point) => string;
 
-interface World {
+interface World {}
 
-}
-
-const serialisePoint: SerialisePoint = ({column, row}) =>
-  `${column},${row}`;
+const serialisePoint: SerialisePoint = ({ column, row }) => `${column},${row}`;
