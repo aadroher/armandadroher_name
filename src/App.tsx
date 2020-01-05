@@ -1,4 +1,4 @@
-import React, { ReactText } from "react";
+import React from "react";
 import styled from "styled-components";
 import classnames from "classnames";
 import "@fortawesome/fontawesome-free/css/all.css";

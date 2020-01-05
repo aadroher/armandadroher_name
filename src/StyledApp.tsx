@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import tinycolor from "tinycolor2";
 import App from "./App";
 
