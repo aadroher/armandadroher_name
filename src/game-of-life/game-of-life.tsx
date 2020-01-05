@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { createCells, createWorld, evolve, getWorldAliveCells } from './world';
+import WorldCanvas from './world-canvas';
 
 const initialCoordinates: number[][] = [
   [0, 0],
@@ -35,9 +36,14 @@ type WorldDimensions = {
   height: number;
 };
 const worldDimensions: WorldDimensions = {
-  width: 300,
-  height: 200,
+  width: 640,
+  height: 480,
 };
+const initialNumCells = Math.floor(
+  (worldDimensions.width / 1) * (worldDimensions.height / 1) * 0.005
+);
+
+console.log({ initialNumCells });
 
 type GetRandomInt = (range: number) => number;
 const getRandomInt: GetRandomInt = range =>
@@ -56,53 +62,20 @@ const getRandomCoordinates: GetRandomCoordinates = (
     getRandomInt(height),
   ]);
 
-const initialCells = createCells(getRandomCoordinates(worldDimensions, 5000));
+const initialCells = createCells(getRandomCoordinates(worldDimensions, 10));
 const initialWorld = createWorld(initialCells);
-
-type WorldSVG = React.FunctionComponent<{
-  aliveCells: number[][];
-  worldDimensions: WorldDimensions;
-}>;
-const WorldSVG: WorldSVG = ({
-  aliveCells,
-  worldDimensions: { width, height },
-}) => (
-  <svg
-    version="1.1"
-    baseProfile="full"
-    width="1280"
-    height="720"
-    viewBox={[-width / 2, -height / 2, width, height]
-      .map(x => x * 1.1)
-      .join(' ')}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    {aliveCells.map(([column, row]) => (
-      <rect
-        key={`${column},${row}`}
-        x={column * 1.1}
-        y={row * 1.1}
-        width="1"
-        height="1"
-        fill="violet"
-        // stroke="#0f0f0f"
-        // strokeWidth="0.1"
-      />
-    ))}
-  </svg>
-);
 
 type GameOfLife = React.FunctionComponent<{}>;
 const GameOfLife: GameOfLife = () => {
   const [world, setWorld] = useState(initialWorld);
-  useInterval(() => {
-    const newWorld = evolve(world);
-    setWorld(newWorld);
-  }, 1000 / ticksPerSecond);
+  // useInterval(() => {
+  //   const newWorld = evolve(world);
+  //   setWorld(newWorld);
+  // }, 1000 / ticksPerSecond);
   return (
     <>
       <p>The game of life</p>
-      <WorldSVG
+      <WorldCanvas
         aliveCells={getWorldAliveCells(world)}
         worldDimensions={worldDimensions}
       />
