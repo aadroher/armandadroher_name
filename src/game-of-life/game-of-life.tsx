@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { createCells, createWorld, evolve } from './world';
+import { createCells, createWorld, evolve, getWorldAliveCells } from './world';
 
 const initialCoordinates: number[][] = [
   [0, 0],
@@ -7,13 +7,36 @@ const initialCoordinates: number[][] = [
   [-1, 0],
 ];
 
+const ticksPerSecond = 12;
+
+type UseInterval = (callback: Function, delay: number) => void;
+const useInterval: UseInterval = (callback, delay) => {
+  const savedCallback = useRef(callback);
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    const tick = () => {
+      savedCallback.current();
+    };
+    if (delay !== null) {
+      const id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};
+
 type WorldDimensions = {
   width: number;
   height: number;
 };
 const worldDimensions: WorldDimensions = {
-  width: 200,
-  height: 150,
+  width: 300,
+  height: 200,
 };
 
 type GetRandomInt = (range: number) => number;
@@ -33,6 +56,9 @@ const getRandomCoordinates: GetRandomCoordinates = (
     getRandomInt(height),
   ]);
 
+const initialCells = createCells(getRandomCoordinates(worldDimensions, 5000));
+const initialWorld = createWorld(initialCells);
+
 type WorldSVG = React.FunctionComponent<{
   aliveCells: number[][];
   worldDimensions: WorldDimensions;
@@ -44,9 +70,11 @@ const WorldSVG: WorldSVG = ({
   <svg
     version="1.1"
     baseProfile="full"
-    width="800"
-    height="600"
-    viewBox={[-width / 2, -height / 2, width, height].join(' ')}
+    width="1280"
+    height="720"
+    viewBox={[-width / 2, -height / 2, width, height]
+      .map(x => x * 1.1)
+      .join(' ')}
     xmlns="http://www.w3.org/2000/svg"
   >
     {aliveCells.map(([column, row]) => (
@@ -66,13 +94,18 @@ const WorldSVG: WorldSVG = ({
 
 type GameOfLife = React.FunctionComponent<{}>;
 const GameOfLife: GameOfLife = () => {
-  const [aliveCells, setAliveCells] = useState(
-    getRandomCoordinates(worldDimensions, 2000)
-  );
+  const [world, setWorld] = useState(initialWorld);
+  useInterval(() => {
+    const newWorld = evolve(world);
+    setWorld(newWorld);
+  }, 1000 / ticksPerSecond);
   return (
     <>
       <p>The game of life</p>
-      <WorldSVG aliveCells={aliveCells} worldDimensions={worldDimensions} />
+      <WorldSVG
+        aliveCells={getWorldAliveCells(world)}
+        worldDimensions={worldDimensions}
+      />
     </>
   );
 };

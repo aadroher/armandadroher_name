@@ -35,6 +35,17 @@ const createWorld: CreateWorld = cells => ({
   ),
 });
 
+type GetWorldAliveCells = (world: World) => number[][];
+const getWorldAliveCells: GetWorldAliveCells = ({
+  aliveCellSerialisedPoints,
+}) =>
+  [...aliveCellSerialisedPoints].map(serialisedPoint => {
+    const [column, row] = serialisedPoint
+      .split(',')
+      .map((n: string) => parseInt(n, 10));
+    return [column, row];
+  });
+
 type GetNeighbours = (cell: Cell) => Cell[];
 const neighbourMatrix: number[][] = [
   [+1, +0],
@@ -91,4 +102,4 @@ const evolve: Evolve = world => {
   return createWorld(newAliveCells);
 };
 
-export { createWorld, createCells, evolve };
+export { createWorld, createCells, getWorldAliveCells, evolve };
