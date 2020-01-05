@@ -14,6 +14,8 @@
     "@types/react-dom": "16.0.11",
     "@types/styled-components": "^4.4.1",
     "@types/tinycolor2": "^1.4.2",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "@typescript-eslint/parser": "^2.14.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "^24.9.0",
@@ -35,7 +37,7 @@
     "eslint-plugin-flowtype": "2.50.1",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.2",
-    "eslint-plugin-react": "7.11.1",
+    "eslint-plugin-react": "^7.11.1",
     "figlet": "^1.2.4",
     "file-loader": "2.0.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
@@ -72,7 +74,10 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "lint": "npm run lint:prettier && npm run lint:eslint",
+    "lint:prettier": "prettier --write '.src/**/*.ts' './src/**/*.tsx'",
+    "lint:eslint": "eslint './src/*.ts' './src/**/*.ts' './src/*.tsx' './src/**/*.tsx' --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -84,7 +89,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.6"
+    "babel-plugin-styled-components": "^1.10.6",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
   },
   "jest": {
     "collectCoverageFrom": [

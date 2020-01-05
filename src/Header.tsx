@@ -1,10 +1,10 @@
-import React from "react";
-import figlet from "figlet";
-import styled from "styled-components";
-import classnames from "classnames";
+import React from 'react';
+import figlet from 'figlet';
+import styled from 'styled-components';
+import classnames from 'classnames';
 
-const fontName = "Calvin S";
-const headerText = "Armand Adroher";
+const fontName = 'Calvin S';
+const headerText = 'Armand Adroher';
 
 type getBannerText = (args: {
   text: string;
@@ -30,20 +30,20 @@ interface BannerData {
 type getBannersData = () => Promise<BannerData[]>;
 const getBannersData = () => {
   const oneLineHeaderData = {
-    className: "desktop",
-    headerText
+    className: 'desktop',
+    headerText,
   };
   const twoLineHeaderData = {
-    className: "mobile",
-    headerText: headerText.replace(" ", "\n")
+    className: 'mobile',
+    headerText: headerText.replace(' ', '\n'),
   };
   return Promise.all(
     [oneLineHeaderData, twoLineHeaderData].map(({ className, headerText }) =>
       getBannerText({ text: headerText, font: fontName }).then(bannerText => ({
         className,
-        bannerText
-      }))
-    )
+        bannerText,
+      })),
+    ),
   );
 };
 
@@ -54,10 +54,10 @@ type Banner = React.FunctionComponent<{
 }>;
 
 const Banner: Banner = ({ className, text }) => {
-  const lines = (text || "").split("\n");
+  const lines = (text || '').split('\n');
   const [firstLine] = lines;
   const numColumns = firstLine.length;
-  const underline = new Array(numColumns).fill("=").join("");
+  const underline = new Array(numColumns).fill('=').join('');
   return (
     <pre
       className={className}
@@ -107,11 +107,11 @@ class Header extends React.Component<HeaderProps> {
     const { banners } = this.state;
 
     return (
-      <div className={classnames("header", className)}>
+      <div className={classnames('header', className)}>
         {banners.map(({ className, bannerText }) => (
           <Banner
             key={bannerText}
-            className={classnames(className, "banner")}
+            className={classnames(className, 'banner')}
             text={bannerText}
           />
         ))}

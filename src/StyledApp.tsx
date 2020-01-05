@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import tinycolor from "tinycolor2";
-import App from "./App";
+import styled from 'styled-components';
+import tinycolor from 'tinycolor2';
+import App from './App';
 
-const fontColour = "violet";
+const fontColour = 'violet';
 const shadowBrighteningPercentage = 10;
 const shadowRadius = 0.3; // in rem.
 
@@ -15,7 +15,7 @@ const StyledApp = styled(App)`
   height: 100%;
   width: 100%;
 
-  font-family: "Fira Mono";
+  font-family: 'Fira Mono';
   font-size: 16px;
   color: #${tinycolor(fontColour).toHex()};
   text-shadow: #${tinycolor(fontColour)
