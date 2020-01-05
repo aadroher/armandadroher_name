@@ -1,5 +1,3 @@
-import { type } from 'os';
-
 interface Point {
   column: number;
   row: number;

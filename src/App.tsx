@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-free/css/brands.css';
 
 import './assets/fira.css';
 import Header from './Header';
+import GameOfLife from './game-of-life/game-of-life';
 
 interface LayoutProps {
   className?: string;
@@ -52,7 +53,7 @@ const getLinks = () => {
           {`${handlePrefix}${handle}`}
         </a>
       </li>
-    ),
+    )
   );
 
   return <ul>{linkElements}</ul>;
@@ -63,10 +64,11 @@ type App = React.FunctionComponent<{
 }>;
 const App: App = ({ className }) => (
   <div className={classnames('app', className)}>
-    <Layout>
+    <GameOfLife></GameOfLife>
+    {/* <Layout>
       <Header />
       {getLinks()}
-    </Layout>
+    </Layout> */}
   </div>
 );
 
