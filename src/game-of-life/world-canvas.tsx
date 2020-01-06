@@ -19,13 +19,12 @@ const updateCanvas: UpdateCanvas = (
     const context = canvas.getContext('2d');
     if (context) {
       context.clearRect(0, 0, canvas.width, canvas.height);
+      context.strokeStyle = 'violet';
+      context.lineWidth = 1;
+      context.strokeRect(0, 0, canvas.width, canvas.height);
       newAliveCells.forEach(([column, row]) => {
-        console.log({ canvas });
-        console.log({ width, height });
-        console.log({ column, row });
-        const x = (column + Math.floor(width / 1)) / 1;
-        const y = (row + Math.floor(height / 1)) / 1;
-        console.log({ x, y });
+        const x = Math.floor(width / 2) + column;
+        const y = Math.floor(height / 2) - row;
         context.fillStyle = 'violet';
         context.fillRect(x, y, 1, 1);
       });

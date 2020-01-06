@@ -36,11 +36,11 @@ type WorldDimensions = {
   height: number;
 };
 const worldDimensions: WorldDimensions = {
-  width: 640,
-  height: 480,
+  width: 160,
+  height: 90,
 };
 const initialNumCells = Math.floor(
-  (worldDimensions.width / 1) * (worldDimensions.height / 1) * 0.005
+  worldDimensions.width * worldDimensions.height * 0.2
 );
 
 console.log({ initialNumCells });
@@ -62,23 +62,25 @@ const getRandomCoordinates: GetRandomCoordinates = (
     getRandomInt(height),
   ]);
 
-const initialCells = createCells(getRandomCoordinates(worldDimensions, 10));
+const initialCells = createCells(
+  getRandomCoordinates(worldDimensions, initialNumCells)
+);
+console.log({ initialCells });
 const initialWorld = createWorld(initialCells);
 
 type GameOfLife = React.FunctionComponent<{}>;
 const GameOfLife: GameOfLife = () => {
   const [world, setWorld] = useState(initialWorld);
-  // useInterval(() => {
-  //   const newWorld = evolve(world);
-  //   setWorld(newWorld);
-  // }, 1000 / ticksPerSecond);
+  useInterval(() => {
+    const newWorld = evolve(world);
+    setWorld(newWorld);
+  }, 1000 / ticksPerSecond);
+
+  const aliveCells = getWorldAliveCells(world);
   return (
     <>
       <p>The game of life</p>
-      <WorldCanvas
-        aliveCells={getWorldAliveCells(world)}
-        worldDimensions={worldDimensions}
-      />
+      <WorldCanvas aliveCells={aliveCells} worldDimensions={worldDimensions} />
     </>
   );
 };
