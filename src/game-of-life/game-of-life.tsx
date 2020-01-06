@@ -1,50 +1,23 @@
 import React, { useRef, useEffect, useState } from 'react';
+import {
+  ticksPerSecond,
+  frameToCanvasScaleFactor,
+  WorldDimensions,
+  aliveCellDensity,
+} from './config';
 import { createCells, createWorld, evolve, getWorldAliveCells } from './world';
 import WorldCanvas from './world-canvas';
 
-const initialCoordinates: number[][] = [
-  [0, 0],
-  [1, 0],
-  [-1, 0],
-];
-
-const frameToCanvasScaleFactor = 4;
-const ticksPerSecond = 60;
-
-type UseInterval = (callback: Function, delay: number) => void;
-const useInterval: UseInterval = (callback, delay) => {
-  const savedCallback = useRef(callback);
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    const tick = () => {
-      savedCallback.current();
-    };
-    if (delay !== null) {
-      const id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-};
-
-type WorldDimensions = {
-  width: number;
-  height: number;
-};
-const worldDimensions: WorldDimensions = {
+type GetWorldDimensions = () => WorldDimensions;
+const getWorldDimensions: GetWorldDimensions = () => ({
   width: (window.innerWidth - 10) / frameToCanvasScaleFactor,
   height: (window.innerHeight - 10) / frameToCanvasScaleFactor,
-};
-const initialNumCells = Math.floor(
-  worldDimensions.width * worldDimensions.height * 0.2
-);
+});
+const worldDimensions = getWorldDimensions();
 
-console.log({ initialNumCells });
+const initialNumCells = Math.floor(
+  worldDimensions.width * worldDimensions.height * aliveCellDensity
+);
 
 type GetRandomInt = (range: number) => number;
 const getRandomInt: GetRandomInt = range =>
@@ -66,20 +39,44 @@ const getRandomCoordinates: GetRandomCoordinates = (
 const initialCells = createCells(
   getRandomCoordinates(worldDimensions, initialNumCells)
 );
-console.log({ initialCells });
 const initialWorld = createWorld(initialCells);
+
+type UseInterval = (callback: Function, delay: number) => void;
+const useInterval: UseInterval = (callback, delay) => {
+  const savedCallback = useRef(callback);
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    const tick = () => {
+      savedCallback.current();
+    };
+
+    if (delay !== null) {
+      const id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};
 
 type GameOfLife = React.FunctionComponent<{}>;
 const GameOfLife: GameOfLife = () => {
   const [world, setWorld] = useState(initialWorld);
+  const [tick, setTick] = useState(0);
   useInterval(() => {
     const newWorld = evolve(world);
     setWorld(newWorld);
+    setTick(tick + 1);
   }, 1000 / ticksPerSecond);
 
   const aliveCells = getWorldAliveCells(world);
   return (
-    <WorldCanvas aliveCells={aliveCells} worldDimensions={worldDimensions} />
+    <WorldCanvas
+      tick={tick}
+      aliveCells={aliveCells}
+      worldDimensions={worldDimensions}
+    />
   );
 };
 
