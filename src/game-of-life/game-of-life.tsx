@@ -8,7 +8,8 @@ const initialCoordinates: number[][] = [
   [-1, 0],
 ];
 
-const ticksPerSecond = 12;
+const frameToCanvasScaleFactor = 4;
+const ticksPerSecond = 60;
 
 type UseInterval = (callback: Function, delay: number) => void;
 const useInterval: UseInterval = (callback, delay) => {
@@ -36,8 +37,8 @@ type WorldDimensions = {
   height: number;
 };
 const worldDimensions: WorldDimensions = {
-  width: 160,
-  height: 90,
+  width: (window.innerWidth - 10) / frameToCanvasScaleFactor,
+  height: (window.innerHeight - 10) / frameToCanvasScaleFactor,
 };
 const initialNumCells = Math.floor(
   worldDimensions.width * worldDimensions.height * 0.2
@@ -78,10 +79,7 @@ const GameOfLife: GameOfLife = () => {
 
   const aliveCells = getWorldAliveCells(world);
   return (
-    <>
-      <p>The game of life</p>
-      <WorldCanvas aliveCells={aliveCells} worldDimensions={worldDimensions} />
-    </>
+    <WorldCanvas aliveCells={aliveCells} worldDimensions={worldDimensions} />
   );
 };
 

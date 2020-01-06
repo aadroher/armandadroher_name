@@ -5,6 +5,8 @@ type WorldDimensions = {
   height: number;
 };
 
+const frameToCanvasScaleFactor = 4;
+
 type UpdateCanvas = (
   canvas: HTMLCanvasElement | null,
   worldDimensions: WorldDimensions,
@@ -23,10 +25,15 @@ const updateCanvas: UpdateCanvas = (
       context.lineWidth = 1;
       context.strokeRect(0, 0, canvas.width, canvas.height);
       newAliveCells.forEach(([column, row]) => {
-        const x = Math.floor(width / 2) + column;
-        const y = Math.floor(height / 2) - row;
+        const x = (Math.floor(width / 2) + column) * frameToCanvasScaleFactor;
+        const y = (Math.floor(height / 2) - row) * frameToCanvasScaleFactor;
         context.fillStyle = 'violet';
-        context.fillRect(x, y, 1, 1);
+        context.fillRect(
+          x,
+          y,
+          1 * frameToCanvasScaleFactor,
+          1 * frameToCanvasScaleFactor
+        );
       });
     }
   }
@@ -46,8 +53,8 @@ const WorldCanvas: WorldCanvas = ({ aliveCells, worldDimensions }) => {
   return (
     <canvas
       ref={canvasRef}
-      width={worldDimensions.width}
-      height={worldDimensions.height}
+      width={worldDimensions.width * frameToCanvasScaleFactor}
+      height={worldDimensions.height * frameToCanvasScaleFactor}
     />
   );
 };
