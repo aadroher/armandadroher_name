@@ -19,6 +19,7 @@ const updateCanvas: UpdateCanvas = (
     if (canvas) {
       const context = canvas.getContext('2d');
       if (context) {
+        // context.imageSmoothingEnabled = false;
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.strokeStyle = 'violet';
         context.lineWidth = 1;
@@ -26,8 +27,19 @@ const updateCanvas: UpdateCanvas = (
         newAliveCells.forEach(([column, row]) => {
           const x = (Math.floor(width / 2) + column) * frameToCanvasScaleFactor;
           const y = (Math.floor(height / 2) - row) * frameToCanvasScaleFactor;
+
+          context.strokeStyle = 'black';
+          context.lineWidth = 0.1 * frameToCanvasScaleFactor;
           context.fillStyle = 'violet';
           context.fillRect(
+            x,
+            y,
+            1 * frameToCanvasScaleFactor,
+            1 * frameToCanvasScaleFactor
+          );
+          context.shadowBlur = 0.5 * frameToCanvasScaleFactor;
+          context.shadowColor = 'violet';
+          context.strokeRect(
             x,
             y,
             1 * frameToCanvasScaleFactor,
