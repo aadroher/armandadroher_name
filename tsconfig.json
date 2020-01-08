@@ -15,7 +15,7 @@
     "lib": ["dom", "es2019"],
     "jsx": "preserve",
     "types": ["react", "jest"],
-    "downlevelIteration": true
+    "downlevelIteration": true,
   },
   "include": ["src"]
 }
