@@ -10,8 +10,8 @@ import WorldCanvas from './world-canvas';
 
 type GetWorldDimensions = () => WorldDimensions;
 const getWorldDimensions: GetWorldDimensions = () => ({
-  width: (window.innerWidth - 10) / frameToCanvasScaleFactor,
-  height: (window.innerHeight - 10) / frameToCanvasScaleFactor,
+  width: window.innerWidth / frameToCanvasScaleFactor,
+  height: window.innerHeight / frameToCanvasScaleFactor,
 });
 const worldDimensions = getWorldDimensions();
 

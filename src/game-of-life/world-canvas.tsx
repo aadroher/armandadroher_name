@@ -33,8 +33,8 @@ const drawFrame: DrawFrame = (
       context.shadowBlur = 2 * frameToCanvasScaleFactor;
       context.shadowColor = 'violet';
       context.fillRect(
-        Math.floor(x * 1.3),
-        Math.floor(y * 1.3),
+        x * 1.3,
+        y * 1.3,
         1 * frameToCanvasScaleFactor,
         1 * frameToCanvasScaleFactor
       );

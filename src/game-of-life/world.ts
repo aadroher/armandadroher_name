@@ -86,9 +86,12 @@ const shouldBeBorn: ShouldBeBorn = (world, cell) =>
 type Evolve = (world: World) => World;
 const evolve: Evolve = world => {
   const { aliveCellSerialisedPoints } = world;
-  const aliveCells = [...aliveCellSerialisedPoints]
-    .map((serialisedPoint: string) => deserialisePoint(serialisedPoint))
-    .map(point => ({ point }));
+  const aliveCells = [...aliveCellSerialisedPoints].map(
+    (serialisedPoint: string) => {
+      const point = deserialisePoint(serialisedPoint);
+      return { point };
+    }
+  );
   const survivingCells = aliveCells.filter(cell => shouldLive(world, cell));
   const deadNeighbours = aliveCells
     .flatMap(aliveCell => getNeighbours(aliveCell))
