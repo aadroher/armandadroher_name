@@ -65,9 +65,11 @@ const GameOfLife: GameOfLife = () => {
   const [world, setWorld] = useState(initialWorld);
   const [tick, setTick] = useState(0);
   useInterval(() => {
+    // if (tick <= 10) {
     const newWorld = evolve(world);
     setWorld(newWorld);
     setTick(tick + 1);
+    // }
   }, 1000 / ticksPerSecond);
 
   const aliveCells = getWorldAliveCells(world);

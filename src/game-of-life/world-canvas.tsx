@@ -30,20 +30,20 @@ const drawFrame: DrawFrame = (
       context.strokeStyle = 'black';
       context.lineWidth = 0.1 * frameToCanvasScaleFactor;
       context.fillStyle = 'violet';
-      context.fillRect(
-        x,
-        y,
-        1 * frameToCanvasScaleFactor,
-        1 * frameToCanvasScaleFactor
-      );
-      context.shadowBlur = 0.5 * frameToCanvasScaleFactor;
+      context.shadowBlur = 2 * frameToCanvasScaleFactor;
       context.shadowColor = 'violet';
-      context.strokeRect(
-        x,
-        y,
+      context.fillRect(
+        Math.floor(x * 1.3),
+        Math.floor(y * 1.3),
         1 * frameToCanvasScaleFactor,
         1 * frameToCanvasScaleFactor
       );
+      // context.strokeRect(
+      //   x,
+      //   y,
+      //   1 * frameToCanvasScaleFactor,
+      //   1 * frameToCanvasScaleFactor
+      // );
     });
   });
 };
