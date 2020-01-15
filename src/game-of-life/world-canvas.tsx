@@ -27,10 +27,10 @@ const drawFrame: DrawFrame = (
       const x = (Math.floor(width / 2) + column) * frameToCanvasScaleFactor;
       const y = (Math.floor(height / 2) - row) * frameToCanvasScaleFactor;
 
-      context.strokeStyle = 'black';
-      context.lineWidth = 0.1 * frameToCanvasScaleFactor;
+      // context.strokeStyle = 'black';
+      // context.lineWidth = 0.1 * frameToCanvasScaleFactor;
       context.fillStyle = 'violet';
-      context.shadowBlur = 2 * frameToCanvasScaleFactor;
+      context.shadowBlur = 5 * frameToCanvasScaleFactor;
       context.shadowColor = 'violet';
       context.fillRect(
         x * 1.3,
@@ -39,8 +39,8 @@ const drawFrame: DrawFrame = (
         1 * frameToCanvasScaleFactor
       );
       // context.strokeRect(
-      //   x,
-      //   y,
+      //   x * 1.3,
+      //   y * 1.3,
       //   1 * frameToCanvasScaleFactor,
       //   1 * frameToCanvasScaleFactor
       // );
