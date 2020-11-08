@@ -1,13 +1,10 @@
 import React, { ReactText } from "react";
 import styled from "styled-components";
 import classnames from "classnames";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "@fortawesome/fontawesome-free/css/brands.css";
 
-import "./assets/fira.css";
-import Title from "./Title";
-import Links from "./Links";
-import GradientText from "./GradientText";
+import Title from "./title";
+import Links from "./links";
+import GradientText from "./gradient-text";
 
 const Layout = styled.div`
   width: 15rem;

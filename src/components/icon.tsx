@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import classnames from "classnames";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "@fortawesome/fontawesome-free/css/brands.css";
 
-import "./assets/fira.css";
+// import "./assets/fira.css";
 
 interface IconProps {
   iconClassName: string;

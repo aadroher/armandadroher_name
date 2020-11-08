@@ -1,6 +1,10 @@
 import styled, { keyframes } from "styled-components";
-import tinycolor from "tinycolor2";
-import App from "./App";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/css/brands.css";
+
+import "../css/fira.css";
+
+import App from "./app";
 
 const fontColour = "violet";
 
