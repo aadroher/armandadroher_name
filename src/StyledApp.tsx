@@ -18,10 +18,6 @@ const StyledApp = styled(App)`
   font-family: "Fira Mono";
   font-size: 16px;
   color: #${tinycolor(fontColour).toHex()};
-  text-shadow: #${tinycolor(fontColour)
-      .brighten(shadowBrighteningPercentage)
-      .toHex()} 0 0 ${shadowRadius}rem;
-
   a {
     color: inherit;
     animation: inherit;

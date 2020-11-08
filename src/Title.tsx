@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import GradientText from "./GradientText";
+
 const titleText = "Armand Adroher";
 const underline = "==============";
 

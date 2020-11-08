@@ -2,6 +2,7 @@ import React, { ReactText } from "react";
 import styled from "styled-components";
 
 import Icon from "./Icon";
+import GradientText from "./GradientText";
 
 const linkData = [
   ["fa-twitter", "@", "aadroher", "twitter.com", "Twitter"],

@@ -7,6 +7,7 @@ import "@fortawesome/fontawesome-free/css/brands.css";
 import "./assets/fira.css";
 import Title from "./Title";
 import Links from "./Links";
+import GradientText from "./GradientText";
 
 const Layout = styled.div`
   width: 15rem;
@@ -23,8 +24,10 @@ type App = React.FunctionComponent<{
 const App: App = ({ className }) => (
   <div className={classnames("app", className)}>
     <Layout>
-      <Title />
-      <Links />
+      <GradientText>
+        <Title />
+        <Links />
+      </GradientText>
     </Layout>
   </div>
 );
