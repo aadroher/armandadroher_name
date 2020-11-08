@@ -3,8 +3,6 @@ import tinycolor from "tinycolor2";
 import App from "./App";
 
 const fontColour = "violet";
-const shadowBrighteningPercentage = 10;
-const shadowRadius = 0.3; // in rem.
 
 const StyledApp = styled(App)`
   padding: 8px;
@@ -16,7 +14,7 @@ const StyledApp = styled(App)`
   width: 100%;
 
   font-family: "Fira Mono";
-  font-size: 16px;
+  font-size: 1rem;
   color: #${tinycolor(fontColour).toHex()};
   a {
     color: inherit;
