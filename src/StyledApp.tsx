@@ -15,7 +15,7 @@ const StyledApp = styled(App)`
 
   font-family: "Fira Mono";
   font-size: 21px;
-  line-height: 1.75;
+  line-height: 1;
   color: #ec68f4 44.33%;
 
   a {

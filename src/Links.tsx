@@ -14,13 +14,9 @@ const linkData = [
 const StyledList = styled.ul`
   padding: 0;
   li {
+    box-sizing: border-box;
+    padding: 1rem 0;
     list-style-type: none;
-    a {
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 `;
 

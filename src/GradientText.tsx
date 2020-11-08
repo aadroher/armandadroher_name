@@ -3,19 +3,11 @@ import styled from "styled-components";
 
 const GradientText = styled.div`
   @supports (-webkit-text-fill-color: transparent) {
-    background: linear-gradient(
-      135deg,
-      gold,
-      orange,
-      red,
-      hotpink,
-      violet,
-      lightskyblue
-    );
-    background-size: 500%;
+    background: linear-gradient(135deg, hotpink, violet, lightskyblue);
+    background-size: 200%;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: gradient 20s ease infinite;
+    animation: gradient 5s ease infinite;
     -webkit-text-fill-color: transparent;
   }
 
