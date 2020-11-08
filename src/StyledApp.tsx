@@ -38,9 +38,10 @@ const StyledApp = styled(App)`
     top: 40%;
     transform: translateY(-50%);
 
-    padding: 2rem;
+    /* padding: 2rem; */
 
     ul {
+      padding: 0;
       li {
         list-style-type: none;
         a {
