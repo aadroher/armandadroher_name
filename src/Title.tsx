@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const titleText = 'ARMAND ADROHER'
-const underline = '=============='
+const titleText = "Armand Adroher";
+const underline = "==============";
 
 type Title = React.FunctionComponent;
 
@@ -12,8 +12,10 @@ const StyledHeading = styled.h1`
 `;
 
 const Title: Title = () => (
-  <StyledHeading> 
-    {titleText}<br />{underline} 
+  <StyledHeading>
+    {titleText}
+    <br />
+    {underline}
   </StyledHeading>
 );
 

@@ -10,7 +10,18 @@ const linkData = [
   ["fa-linkedin-in", "", "armandadroher", "www.linkedin.com/in", "LinkedIn"],
 ];
 
-const StyledList = styled.ul``;
+const StyledList = styled.ul`
+  padding: 0;
+  li {
+    list-style-type: none;
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+`;
 
 type Links = React.FunctionComponent;
 const Links: Links = () => (

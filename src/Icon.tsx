@@ -16,8 +16,8 @@ const Icon: Icon = ({ iconClassName, className }) => (
 );
 
 const StyledIcon = styled(Icon)`
-  margin-right: 0.6rem;
-  min-width: 1rem;
+  margin-right: 1rem;
+  width: 1rem;
   text-align: center;
 `;
 

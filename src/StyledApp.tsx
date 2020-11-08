@@ -26,33 +26,6 @@ const StyledApp = styled(App)`
     color: inherit;
     animation: inherit;
   }
-
-  & > .main-container {
-    width: 30rem;
-    @media (max-width: 27rem) {
-      width: 15rem;
-    }
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    top: 40%;
-    transform: translateY(-50%);
-
-    /* padding: 2rem; */
-
-    ul {
-      padding: 0;
-      li {
-        list-style-type: none;
-        a {
-          text-decoration: none;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-  }
 `;
 
 export default StyledApp;

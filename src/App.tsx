@@ -5,18 +5,17 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/css/brands.css";
 
 import "./assets/fira.css";
-import Header from "./Header";
 import Title from "./Title";
 import Links from "./Links";
 
-interface LayoutProps {
-  className?: string;
-  children?: React.ReactElement<any>[];
-}
-type Layout = React.FunctionComponent<LayoutProps>;
-const Layout: Layout = ({ className, children }) => (
-  <div className={classnames("main-container", className)}>{children}</div>
-);
+const Layout = styled.div`
+  width: 15rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 45%;
+  transform: translateY(-55%);
+`;
 
 type App = React.FunctionComponent<{
   className?: string;
