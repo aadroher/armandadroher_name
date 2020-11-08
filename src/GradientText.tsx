@@ -4,7 +4,7 @@ import styled from "styled-components";
 const GradientText = styled.div`
   @supports (-webkit-text-fill-color: transparent) {
     background: linear-gradient(
-      141.27deg,
+      135deg,
       #ff904e -4.24%,
       #ff5982 21.25%,
       #ec68f4 44.33%,

@@ -14,11 +14,15 @@ const StyledApp = styled(App)`
   width: 100%;
 
   font-family: "Fira Mono";
-  font-size: 1rem;
-  color: #${tinycolor(fontColour).toHex()};
+  font-size: 18px;
+  color: #ec68f4 44.33%;
+
   a {
     color: inherit;
-    animation: inherit;
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
   }
 `;
 

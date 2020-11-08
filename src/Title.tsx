@@ -9,7 +9,7 @@ const underline = "==============";
 type Title = React.FunctionComponent;
 
 const StyledHeading = styled.h1`
-  font-size: 1rem;
+  font-size: inherit;
   font-weight: normal;
 `;
 
